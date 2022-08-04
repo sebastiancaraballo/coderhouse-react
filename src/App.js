@@ -6,12 +6,13 @@ import ItemListContainer from './components/ItemListContainer';
 
 function App() {
   return (
-    <header>
+    <body>
       <SecondaryHeader/>
       <Header/>
       <Navigation/>
-      <ItemListContainer greeting="Work in Progress"/>
-    </header>
+      <ItemListContainer/>
+    </body>
+    
   );
 }
 
