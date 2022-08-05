@@ -10,4 +10,5 @@
 body {
   font-family: 'Poppins';
   color: #0f172a;
+  @apply antialiased;
 }
