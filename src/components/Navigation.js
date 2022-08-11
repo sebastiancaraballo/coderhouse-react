@@ -1,22 +1,25 @@
-function Navigation() {
+import { NavLink } from "react-router-dom";
+
+function Navigation({items}) {
   return (
     <div className="grid place-items-center text-center">
-      <ul className="flex flex-row flex-wrap gap-3 w-4/5">
-        <li className="flex-auto hover:text-highlight text-slate-700">
-          <a href="#">FLORALS</a>
-        </li>
-        <li className="flex-auto hover:text-highlight text-slate-700">
-          <a href="#">SUCCULENTS</a>
-        </li>
-        <li className="flex-auto hover:text-highlight text-slate-700">
-          <a href="#">ORCHARD</a>
-        </li>
-        <li className="flex-auto hover:text-highlight text-slate-700">
-          <a href="#">FRUIT TREES</a>
-        </li>
-        <li className="flex-auto hover:text-highlight text-slate-700">
-          <a href="#">BONSAI</a>
-        </li>
+      <ul className="flex flex-col lg:flex-row flex-wrap gap-3 w-4/5">
+      {
+        items.map((item) => {
+          return (
+            <NavLink
+              to={`categories/${item.name}`}
+              className={({ isActive }) =>
+                isActive
+                  ? "flex-auto text-highlight font-bold"
+                  : "flex-auto text-slate-700 hover:text-highlight"
+              }
+            >
+              {item.name.toUpperCase()}
+            </NavLink>
+          )
+        })
+      }
       </ul>
     </div>
   );
