@@ -1,28 +1,37 @@
 import { useEffect } from "react";
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import ItemList from "./ItemList";
-import florals from "../services/florals";
+import { useParams } from "react-router-dom";
+import items from "../data/items.json";
+import categories from "../data/categories.json";
 
-function getFlorals() {
+function getItems(categoryName) {
   return new Promise((resolve) => {
+    let category = categories.find((category) => category.name == categoryName)
+
     setTimeout(() => {
-      resolve(florals);
-    }, 2000);
+      if (category == undefined) {
+        resolve(items);
+      } else {
+        resolve(items.filter((item) => item.categoryId == category.id));
+      }
+    }, 500);
   });
 }
 
 function ItemListContainer() {
-  const [florals, setFlorals] = useState([]);
+  const [items, setItems] = useState([]);
+  const categoryName = useParams().categoryName;
 
   useEffect(() => {
-    getFlorals().then((response) => {
-      setFlorals(response);
+    getItems(categoryName).then((response) => {
+      setItems(response);
     });
-  }, []);
+  }, [categoryName]);
 
   return (
     <div className="mt-12">
-      <ItemList items={florals}/>
+      <ItemList items={items} />
     </div>
   );
 }
