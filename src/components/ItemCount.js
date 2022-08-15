@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import RoundButton from './buttons/RoundButton';
 
-function ItemCount({initial, stock, callback}) {
+function ItemCount({initial = 1, stock, callback}) {
   const [items, setItems] = useState(initial);
 
   function handleIncrement() {
     if (items === stock) {
       return items;
     } else {
-      setItems(items + 1);
-      callback()
+      let newCount = items + 1;
+      setItems(newCount);
+      callback(newCount)
       return items;
     }
   }
@@ -18,14 +19,15 @@ function ItemCount({initial, stock, callback}) {
     if (items === 1) {
       return items;
     } else {
-      setItems(items - 1);
-      callback()
+      let newCount = items - 1;
+      setItems(newCount);
+      callback(newCount)
       return items;
     }
   }
 
   return (
-    <div className="grid grid-rows-2 grid-flow-col m-auto gap-x-2 border-2 border-slate-300 p-2 w-36">
+    <div className="grid grid-rows-2 grid-flow-col gap-x-2 border border-gray-400 p-2 w-36 rounded-lg">
       <div className="row-span-2 m-auto text-xl mr-6">{items}</div>
       <RoundButton callback={handleIncrement} roundDirection="rounded-t-lg" label={"+"}/>
       <RoundButton callback={handleDecrement} roundDirection="rounded-b-lg" label={"-"}/>
