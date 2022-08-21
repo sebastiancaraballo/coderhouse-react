@@ -1,11 +1,27 @@
 import ReactMarkdown from 'react-markdown'
 import ItemCount from './ItemCount';
+import Button from './buttons/Button'
+import React, { useState, useContext, useEffect } from "react";
+import { cartContext } from "../store/cartContext";
 
 function ItemDetail({item}) {
   const image = require(`../assets/images/${item.pictureUrl}`);
+  const [itemCount, setItemCount] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
+  const { addToCart, isInCart } = useContext(cartContext);
+
+  useEffect(() => {
+    let added = isInCart(item.id);
+    setAddedToCart(added);
+  }, []);
 
   function handleItemCount(count) {
-    console.log(count);
+    setItemCount(count);
+  }
+
+  function handleAddToCart() {
+    addToCart(item, itemCount);
+    setAddedToCart(true);
   }
 
   return (
@@ -20,7 +36,19 @@ function ItemDetail({item}) {
           {`$ ${item.price}`}
         </h3>
         <div className="border-t border-gray-400 my-3"></div>
-        <ItemCount stock={item.stock} callback={handleItemCount} />
+        {
+          addedToCart ? (
+            <Button label={"Added to Cart"} />
+          ) : (
+            <div>
+              <p className="mt-3 mb-1">Quantity:</p>
+              <ItemCount stock={item.stock} callback={handleItemCount} />
+              <br></br>
+              <Button callback={handleAddToCart} label={"Add to Cart"} />
+            </div>
+          )
+        }
+       
         <p className="mt-3 mb-1">Product details:</p>
         <ReactMarkdown>
           {item.description}

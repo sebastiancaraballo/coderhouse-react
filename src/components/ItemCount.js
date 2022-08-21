@@ -27,10 +27,10 @@ function ItemCount({initial = 1, stock, callback}) {
   }
 
   return (
-    <div className="grid grid-rows-2 grid-flow-col gap-x-2 border border-gray-400 p-2 w-36 rounded-lg">
-      <div className="row-span-2 m-auto text-xl mr-6">{items}</div>
-      <RoundButton callback={handleIncrement} roundDirection="rounded-t-lg" label={"+"}/>
-      <RoundButton callback={handleDecrement} roundDirection="rounded-b-lg" label={"-"}/>
+    <div className="grid grid-rows-2 grid-flow-col border border-gray-400 w-fit h-12 rounded-lg">
+      <div className="row-span-2 my-auto mx-6 text-sm">{items}</div>
+      <RoundButton callback={handleIncrement} roundDirection="rounded-tr-lg" label={"+"}/>
+      <RoundButton callback={handleDecrement} roundDirection="rounded-br-lg" label={"-"}/>
     </div>
   );
 }
