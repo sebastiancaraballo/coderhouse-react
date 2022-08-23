@@ -3,6 +3,7 @@ import ItemCount from './ItemCount';
 import Button from './buttons/Button'
 import React, { useState, useContext, useEffect } from "react";
 import { cartContext } from "../store/cartContext";
+import { Link } from "react-router-dom";
 
 function ItemDetail({item}) {
   const image = require(`../assets/images/${item.pictureUrl}`);
@@ -38,7 +39,7 @@ function ItemDetail({item}) {
         <div className="border-t border-gray-400 my-3"></div>
         {
           addedToCart ? (
-            <Button label={"Added to Cart"} />
+            <Link to="/cart"><Button label={"Go to Cart"} /></Link>
           ) : (
             <div>
               <p className="mt-3 mb-1">Quantity:</p>

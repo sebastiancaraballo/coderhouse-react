@@ -5,6 +5,7 @@ import ShoppingCart from './components/ShoppingCart';
 import ItemListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import Footer from './components/Footer';
+import Cart from './components/Cart';
 import {
   BrowserRouter,
   Routes,
@@ -20,6 +21,7 @@ function App() {
         <Header/>
         <NavigationContainer/>
         <Routes>
+          <Route path="cart" element={<Cart/>}></Route>
           <Route path="categories/:categoryName" element={<ItemListContainer/>}></Route>
           <Route path="item/:itemId" element={<ItemDetailContainer/>}></Route>
           <Route path="/" element={<ItemListContainer/>}/>
