@@ -2,20 +2,18 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
-import items from "../data/items.json";
 import categories from "../data/categories.json";
+import { getItemsDB, getItemsByCategoryIdDB } from '../services/itemsCollection';
 
 function getItems(categoryName) {
   return new Promise((resolve) => {
     let category = categories.find((category) => category.name == categoryName)
 
-    setTimeout(() => {
-      if (category == undefined) {
-        resolve(items);
-      } else {
-        resolve(items.filter((item) => item.categoryId == category.id));
-      }
-    }, 500);
+    if (category == undefined) {
+      return getItemsDB(resolve);
+    } else {
+      return getItemsByCategoryIdDB(resolve, category.id);
+    }
   });
 }
 

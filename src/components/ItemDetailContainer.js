@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import items from "../data/items.json";
 import ItemDetail from "./ItemDetail";
+import { getItemsByIdDB } from '../services/itemsCollection';
 
 function getItem(itemId) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => resolve(items.find((item) => item.id == itemId)), 500);
+  return new Promise((resolve) => {
+    return getItemsByIdDB(resolve, itemId);
   });
 }
 
