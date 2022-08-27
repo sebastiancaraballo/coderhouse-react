@@ -16,7 +16,7 @@ function CartItem({ item }) {
         <img className="max-h-[6rem]" src={image}></img>
       </div>
       <div className="flex flex-col m-auto">{`${item.title} (${item.quantity})`}</div>
-      <div className="flex flex-col m-auto">$ {item.price * item.quantity}</div>
+      <div className="flex flex-col m-auto">$ {(item.price * item.quantity).toFixed(2)}</div>
       <div onClick={handleRemoveFromCart} className="flex flex-col m-auto w-6 cursor-pointer">
         <img src={closeIcon}></img>
       </div>
