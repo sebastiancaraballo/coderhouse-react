@@ -3,6 +3,7 @@ import { cartContext } from "../store/cartContext";
 import CartItem from "./CartItem";
 import CartTotal from "./CartTotal";
 import EmptyCart from "./EmptyCart";
+import CheckoutForm from "./CheckoutForm";
 
 function Cart() {
   const { cart } = useContext(cartContext);
@@ -12,14 +13,19 @@ function Cart() {
       {cart.length === 0 ? (
         <EmptyCart />
       ) : (
-        <div>
-          <div>
-            {cart.map((item) => {
-              return <CartItem item={item} />;
-            })}
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          <div className="flex flex-col md:col-start-1 md:col-end-3">
+            <div>
+              {cart.map((item) => {
+                return <CartItem item={item} />;
+              })}
+            </div>
+            <div>
+              <CartTotal cart={cart} />
+            </div>
           </div>
-          <div>
-            <CartTotal cart={cart} />
+          <div className="flex flex-col md:col-start-3 md:col-end-4 ml-3">
+            <CheckoutForm />
           </div>
         </div>
       )}
